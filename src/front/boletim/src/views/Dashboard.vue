@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { api } from '@/services/api';
-import Post from '@/types/Post';
+import type Post from '@/types/Post';
 import PostItem from '@/components/PostItem.vue';
 
 

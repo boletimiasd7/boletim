@@ -3,17 +3,17 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   // Configuração padrão dos Headers
-  const headers: HeadersInit = {
-    'Content-Type': 'application/json',
-    ...options.headers,
-  };
+const headers = options?.headers ? new Headers(options.headers) : new Headers();
+
+
 
   // Se o seu .NET 10 usa [Authorize], aqui você injeta o token JWT.
   // Exemplo buscando do localStorage (ou poderia ser da sua Store do Pinia/Vue):
   const token = localStorage.getItem('access_token');
-  if (token) {
-    headers['Authorization'] = `Bearer ${token}`;
-  }
+
+  if (!headers.has("Authorization") && token) {
+    headers.set("Authorization", `Bearer ${token}`);
+}
 
   const config: RequestInit = {
     ...options,
@@ -32,7 +32,7 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
       if (response.status === 403) {
         console.error('Sem permissão para acessar este recurso.');
       }
-      
+
       // Captura o corpo do erro (útil se o .NET retornar um ProblemDetails)
       const errorData = await response.json().catch(() => null);
       throw new Error(errorData?.title || `Erro HTTP: ${response.status}`);
@@ -53,12 +53,12 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
 // Exportando os métodos HTTP simplificados
 export const api = {
   get: <T>(url: string) => request<T>(url, { method: 'GET' }),
-  
-  post: <T>(url: string, body: any) => 
+
+  post: <T>(url: string, body: any) =>
     request<T>(url, { method: 'POST', body: JSON.stringify(body) }),
-    
-  put: <T>(url: string, body: any) => 
+
+  put: <T>(url: string, body: any) =>
     request<T>(url, { method: 'PUT', body: JSON.stringify(body) }),
-    
+
   delete: <T>(url: string) => request<T>(url, { method: 'DELETE' }),
 };
