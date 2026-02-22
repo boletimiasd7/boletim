@@ -15,6 +15,13 @@ if (!app.Environment.IsDevelopment())
 
 app.UseRouting();
 
+app.UseCors(policy =>
+{
+    policy.AllowAnyOrigin()
+          .AllowAnyMethod()
+          .AllowAnyHeader();
+});
+
 app.UseAuthorization();
 
 app.MapStaticAssets();
