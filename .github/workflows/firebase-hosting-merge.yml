@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Instala dependencias e realizao  build
+      - name: Instala dependencias e realiza o build
         run: npm ci && npm run build
         working-directory: src/front/boletim
         
