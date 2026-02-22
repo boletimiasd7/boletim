@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import Post from "@/types/Post";
+import type Post from "@/types/Post";
 
 interface Props {
   item: Post;
