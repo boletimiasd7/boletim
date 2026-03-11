@@ -2,6 +2,7 @@ steps:
   # Passo 1: Construir a imagem do container usando o Dockerfile
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "-t", "gcr.io/$PROJECT_ID/boletim:$COMMIT_SHA", "."]
+    dir: "src/back/boletim/boletim"
 
   # Passo 2: Enviar a imagem construída para o Artifact Registry (ou Container Registry)
   - name: "gcr.io/cloud-builders/docker"
