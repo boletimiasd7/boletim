@@ -1,6 +1,11 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>Sobre</h1>
+    <p>
+      Este projeto foi feito para ser uma ferramenta de apoio ao ministério de comunicação das
+      igrejas
+    </p>
+    <p>Sendo uma ferramenta para minimizar o trabalho e trazer mais eficiência aos ministérios.</p>
   </div>
 </template>
 

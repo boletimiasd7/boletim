@@ -25,6 +25,7 @@ onMounted(async () => {
     igrejas.value = await api.get<Igreja[]>('/igreja/listar')
   } catch (erro) {
     alert('Erro ao carregar os dados. Verifique o console.')
+    console.error('Erro ao carregar os dados da API:', erro)
   } finally {
     carregando.value = false
   }
