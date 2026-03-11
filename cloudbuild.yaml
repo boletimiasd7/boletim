@@ -21,3 +21,6 @@ steps:
       - "managed" # Opcional: Especifica plataforma gerenciada
 images:
   - "gcr.io/$PROJECT_ID/boletim:$COMMIT_SHA"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
