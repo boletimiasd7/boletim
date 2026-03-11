@@ -17,7 +17,7 @@ steps:
       - "--image"
       - "gcr.io/$PROJECT_ID/boletim:$COMMIT_SHA"
       - "--region"
-      - "$LOCATION" # Substitua pela sua região (ex: southamerica-east1)
+      - "southamerica-east1" # Substitua pela sua região (ex: southamerica-east1)
       - "--platform"
       - "managed" # Opcional: Especifica plataforma gerenciada
 images:
