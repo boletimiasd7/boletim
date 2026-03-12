@@ -1,5 +1,7 @@
-﻿using boletim.Models.Responses;
+﻿using boletim.Database;
+using boletim.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace boletim.Controllers
 {
@@ -7,13 +9,23 @@ namespace boletim.Controllers
     [ApiController]
     public class IgrejaController : ControllerBase
     {
-        [HttpGet("listar")]
-        public IActionResult Listar()
+        private readonly BoletimDb _db;
+
+        public IgrejaController(BoletimDb db)
         {
-            return Ok(new List<IgrejaListagem> {
-            new IgrejaListagem { Id = 1, Nome = "604 Norte" },
-            new IgrejaListagem { Id = 2, Nome = "605 Norte" },
-            });
+            _db = db;
+        }
+
+        [HttpGet("listar")]
+        public async Task<IActionResult> ListarAsync()
+        {
+            List<IgrejaListagem> igrejas = await _db.Igreja.Select(x => new IgrejaListagem
+            {
+                Id = x.Id,
+                Nome = x.Nome
+            }).ToListAsync();
+
+            return Ok(igrejas);
         }
     }
 }

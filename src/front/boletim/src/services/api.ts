@@ -5,8 +5,6 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
   // Configuração padrão dos Headers
 const headers = options?.headers ? new Headers(options.headers) : new Headers();
 
-
-
   // Se o seu .NET 10 usa [Authorize], aqui você injeta o token JWT.
   // Exemplo buscando do localStorage (ou poderia ser da sua Store do Pinia/Vue):
   const token = localStorage.getItem('access_token');
@@ -61,4 +59,6 @@ export const api = {
     request<T>(url, { method: 'PUT', body: JSON.stringify(body) }),
 
   delete: <T>(url: string) => request<T>(url, { method: 'DELETE' }),
+
+  montarUrl:  (endpoint: string) => `${BASE_URL}${endpoint}`
 };

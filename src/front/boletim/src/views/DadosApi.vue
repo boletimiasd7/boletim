@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Lista de Posts</h2>
+    <h2>Lista de Igrejas</h2>
     <p v-if="carregando">Carregando dados da API</p>
     <template v-else>
       <div v-for="item in igrejas" :key="item.id">
