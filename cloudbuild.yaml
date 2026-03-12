@@ -20,6 +20,7 @@ steps:
       - "southamerica-east1" # Substitua pela sua região (ex: southamerica-east1)
       - "--platform"
       - "managed" # Opcional: Especifica plataforma gerenciada
+      - '--set-secrets=ConnectionStrings__DefaultConnection=projects/37795619433/secrets/connection-string-api-boletim:latest'
 images:
   - "gcr.io/$PROJECT_ID/boletim:$COMMIT_SHA"
 
