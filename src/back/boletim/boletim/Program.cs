@@ -1,6 +1,7 @@
 using boletim.Database;
+using boletim.Servicos;
+using Google.Cloud.Storage.V1;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,9 @@ builder.Services.AddDbContext<BoletimDb>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<ArquivoServico>();
+builder.Services.AddSingleton(provider => StorageClient.Create());
 
 var app = builder.Build();
 
