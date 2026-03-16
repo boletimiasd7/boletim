@@ -13,6 +13,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ArquivoServico>();
 builder.Services.AddSingleton(provider => StorageClient.Create());
+builder.Services.AddHttpClient<IGoogleAuthClient, GoogleAuthClient>();
+builder.Services.AddScoped<IJwtService, JwtService>();
 
 var app = builder.Build();
 
