@@ -1,9 +1,11 @@
 ﻿using boletim.Servicos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace boletim.Controllers
 {
     [Route("api/arquivo")]
+    [Authorize]
     public class ArquivoController : ControllerBase
     {
         private readonly ArquivoServico _arquivoServico;

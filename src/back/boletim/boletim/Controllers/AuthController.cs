@@ -25,11 +25,12 @@ namespace boletim.Controllers
 
         [HttpPost("google-login")]
         [Consumes("application/json")]
-        [AllowAnonymous] // Regra 3: Liberado sem [Authorize]
+        [AllowAnonymous] 
         public async Task<IActionResult> GoogleLogin(GoogleLoginRequest request)
         {
             // 1. O .NET faz o POST para https://oauth2.googleapis.com/token
             // Enviando: client_id, client_secret, request.Code, request.CodeVerifier e grant_type=authorization_code
+            
             var googleTokens = await _googleAuthClient.ExchangeCodeForTokensAsync(request);
 
             // 2. Extrai o Email do id_token retornado pelo Google
@@ -66,46 +67,5 @@ namespace boletim.Controllers
             // 3. Retorna para o Vue
             return Ok();
         }
-
-        //[HttpGet("callback")]
-        //public async Task<IActionResult> GoogleCallback([FromQuery] string code)
-        //{
-        //    if (string.IsNullOrEmpty(code))
-        //        return BadRequest("Missing authorization code");
-
-        //    // Exchange code for tokens
-        //    var tokenRequest = new HttpRequestMessage(HttpMethod.Post, "https://oauth2.googleapis.com/token")
-        //    {
-        //        Content = new FormUrlEncodedContent(new Dictionary<string, string>
-        //    {
-        //        { "code", code },
-        //        { "client_id", _clientId },
-        //        { "client_secret", _clientSecret },
-        //        { "redirect_uri", _redirectUri },
-        //        { "grant_type", "authorization_code" }
-        //    })
-        //    };
-
-        //    var tokenResponse = await _httpClient.SendAsync(tokenRequest);
-        //    if (!tokenResponse.IsSuccessStatusCode)
-        //        return StatusCode((int)tokenResponse.StatusCode, "Token exchange failed");
-
-        //    var tokenData = JsonSerializer.Deserialize<Dictionary<string, object>>(
-        //        await tokenResponse.Content.ReadAsStringAsync()
-        //    );
-
-        //    // Get user info
-        //    var userInfoRequest = new HttpRequestMessage(HttpMethod.Get, "https://www.googleapis.com/oauth2/v2/userinfo");
-        //    userInfoRequest.Headers.Authorization =
-        //        new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", tokenData["access_token"].ToString());
-
-        //    var userInfoResponse = await _httpClient.SendAsync(userInfoRequest);
-        //    var userInfo = JsonSerializer.Deserialize<Dictionary<string, object>>(
-        //        await userInfoResponse.Content.ReadAsStringAsync()
-        //    );
-
-        //    // TODO: Save user info in DB or create JWT
-        //    return Ok(userInfo);
-        //}
     }
 }

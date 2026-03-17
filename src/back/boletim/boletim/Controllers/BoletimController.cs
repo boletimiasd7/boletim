@@ -1,9 +1,11 @@
 ﻿using boletim.Models.Responses;
 using boletim.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace boletim.Controllers
 {
+    [Authorize]
     public class BoletimController : Controller
     {
         [HttpGet]

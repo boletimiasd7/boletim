@@ -1,5 +1,6 @@
 ﻿using boletim.Database;
 using boletim.Models.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,7 @@ namespace boletim.Controllers
 {
     [Route("api/igreja")]
     [ApiController]
+    [Authorize]
     public class IgrejaController : ControllerBase
     {
         private readonly BoletimDb _db;

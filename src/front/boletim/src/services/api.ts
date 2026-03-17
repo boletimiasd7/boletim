@@ -11,7 +11,9 @@ const headers = options?.headers ? new Headers(options.headers) : new Headers();
 
   if (!headers.has("Authorization") && token) {
     headers.set("Authorization", `Bearer ${token}`);
-}
+  }
+
+  headers.set("Content-Type", `application/json`);
 
   const config: RequestInit = {
     ...options,
