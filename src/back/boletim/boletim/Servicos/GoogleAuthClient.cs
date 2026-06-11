@@ -32,8 +32,8 @@ namespace boletim.Servicos
             // Monta o formulário no formato x-www-form-urlencoded exigido pelo OAuth2
             var tokenRequestParameters = new Dictionary<string, string>
         {
-            { "client_id", _clientId },
-            { "client_secret", _clientSecret },
+            { "client_id", clientId },
+            { "client_secret", clientSecret },
             { "code", request.Code },
             { "code_verifier", request.CodeVerifier }, // O PKCE magic acontece aqui!
             { "grant_type", "authorization_code" },

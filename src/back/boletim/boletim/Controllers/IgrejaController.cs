@@ -8,7 +8,7 @@ namespace boletim.Controllers
 {
     [Route("api/igreja")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "Administrador")]
     public class IgrejaController : ControllerBase
     {
         private readonly BoletimDb _db;

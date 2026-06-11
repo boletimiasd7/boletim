@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.IdentityModel.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,7 +57,7 @@ builder.Services.AddAuthentication(options =>
         ClockSkew = TimeSpan.Zero,
 
         // Avisa ao .NET qual Claim contém as Roles para o [Authorize(Roles = "...")] funcionar
-        RoleClaimType = ClaimTypes.Role
+        RoleClaimType = ClaimTypes.Role,
     };
 });
 
@@ -64,6 +65,8 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
+
+IdentityModelEventSource.ShowPII = true;
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
